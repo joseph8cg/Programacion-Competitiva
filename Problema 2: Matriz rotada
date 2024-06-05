@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+
+void rotarMatriz(std::vector<std::vector<int>>& matriz) {
+    int n = matriz.size();
+
+    // Paso 1: Transponer la matriz
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            std::swap(matriz[i][j], matriz[j][i]);
+        }
+    }
+
+    // Paso 2: Invertir las filas de la matriz transpuesta
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n / 2; ++j) {
+            std::swap(matriz[i][j], matriz[i][n - 1 - j]);
+        }
+    }
+}
+
+int main() {
+    // Ejemplo de matriz de 3x3
+    std::vector<std::vector<int>> matriz = {{1, 2, 3},
+                                             {4, 5, 6},
+                                             {7, 8, 9}};
+
+    // Imprimir matriz original
+    std::cout << "Matriz original:" << std::endl;
+    for (const auto& fila : matriz) {
+        for (int elemento : fila) {
+            std::cout << elemento << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    // Rotar la matriz
+    rotarMatriz(matriz);
+
+    // Imprimir matriz rotada
+    std::cout << "\nMatriz rotada 90 grados en sentido horario:" << std::endl;
+    for (const auto& fila : matriz) {
+        for (int elemento : fila) {
+            std::cout << elemento << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
+
+
+SALIDA:
+Matriz original:
+1 2 3 
+4 5 6 
+7 8 9 
+
+Matriz rotada 90 grados en sentido horario:
+7 4 1 
+8 5 2 
+9 6 3 
